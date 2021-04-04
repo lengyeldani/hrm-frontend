@@ -16,3 +16,13 @@ export function getLoggedInUser() {
         ...fetchOptions
     })
 }
+
+export function getUsers() {
+    const url = apiEndpoint + 'users/index';
+
+    return fetch(url, {
+        //...fetchOptions,
+        headers,
+        method:'GET'
+    })
+}

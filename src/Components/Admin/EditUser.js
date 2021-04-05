@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import UserRoleOptions from './UserRoleOptions';
-import {getRoles, getDepartments, addUser} from '../../Services/UserService'
 import UserDepartmentOptions from './UserDepartmentOptions';
+import UserRoleOptions from './UserRoleOptions';
 import {toast} from 'react-toastify'
+import {getRoles, getDepartments, updateUser, getUserById} from '../../Services/UserService'
+import {useParams} from 'react-router-dom';
 
-
-export class AddUser extends Component {
-
+export class EditUser extends Component {
     constructor(props){
         super(props);
         this.state={
+            id:'',
             username:'',
             role:'',
             department:'',
@@ -23,8 +23,9 @@ export class AddUser extends Component {
             roles:[],
             departments:[]
         }
+        
     }
-
+    
     componentDidMount(){
         getRoles()
         .then(response => response.json()
@@ -33,6 +34,24 @@ export class AddUser extends Component {
         getDepartments()
         .then(response => response.json())
         .then(departments => this.setState({departments}))
+
+        const {id} = this.props.match.params;
+        
+        getUserById(id)
+        .then(response => response.json())
+        .then(user => this.setState({
+            id:id,
+            username: user.username,
+            role:user.role_id,
+            department:user.department_id,
+            firstName:user.firstName,
+            lastName:user.lastName,
+            dateOfBirth:user.dateOfBirth,
+            zipCode:user.zipCode,
+            address:user.address,
+            mothersFirstName:user.mothersFirstName,
+            mothersLastName:user.mothersLastName,
+        }))
         
     }
 
@@ -40,7 +59,7 @@ export class AddUser extends Component {
         this.setState({[event.target.name]:event.target.value});
     }
 
-    handleSave = () => {
+    handleUpdate = () => {
         const data = {
             username: this.state.username,
             role: this.state.role,
@@ -54,10 +73,10 @@ export class AddUser extends Component {
             mothersLastName: this.state.mothersLastName
         }
 
-        addUser(data)
+        updateUser(data,this.state.id)
         .then(response => {
             if (response.ok) {
-                toast.success('User added successfully!')
+                toast.success('User updated successfully!')
             }
         })
     }
@@ -65,7 +84,7 @@ export class AddUser extends Component {
     render() {
         return (
             <div>
-                <h3>Add new user</h3>
+                <h3>Edit user</h3>
                 <div className="row">
                     <div className="form-group col-3">
                         <label>username:</label>
@@ -74,11 +93,13 @@ export class AddUser extends Component {
                             className="form-control"                            
                             name="username"
                             type="text"
+                            value={this.state.username}
                         />
                     </div>                    
                     <div className="form-group col-3">
                         <label>role:</label>
                         <select
+                            value={this.state.role}
                             onChange={e=>this.setState({role:e.target.value})} 
                             className="form-control">
                             <option></option>
@@ -88,6 +109,7 @@ export class AddUser extends Component {
                     <div className="form-group col-3">
                         <label>department:</label>
                         <select 
+                            value={this.state.department}
                             className="form-control"
                             onChange={e => this.setState({department:e.target.value})}>
                             <option></option>
@@ -100,6 +122,7 @@ export class AddUser extends Component {
                             onChange={e=>this.handleInputChange(e)}
                             className="form-control"                            
                             name="firstName"
+                            value={this.state.firstName}
                         />
                     </div>
                     <div className="form-group col-3">
@@ -108,6 +131,7 @@ export class AddUser extends Component {
                             onChange={e=>this.handleInputChange(e)}
                             className="form-control"                            
                             name="lastName"
+                            value={this.state.lastName}
                         />
                     </div>
                     <div className="form-group col-3">
@@ -117,6 +141,7 @@ export class AddUser extends Component {
                             className="form-control"                            
                             name="dateOfBirth"
                             type="date"
+                            value={this.state.dateOfBirth}
                         />
                     </div>
                     <div className="form-group col-3">
@@ -125,6 +150,7 @@ export class AddUser extends Component {
                             onChange={e=>this.handleInputChange(e)}
                             className="form-control"                            
                             name="zipCode"
+                            value={this.state.zipCode}
                         />
                     </div>
                     <div className="form-group col-3">
@@ -133,6 +159,7 @@ export class AddUser extends Component {
                             onChange={e=>this.handleInputChange(e)}
                             className="form-control"                            
                             name="address"
+                            value={this.state.address}
                         />
                     </div>
                     <div className="form-group col-3">
@@ -141,6 +168,7 @@ export class AddUser extends Component {
                             onChange={e=>this.handleInputChange(e)}
                             className="form-control"                            
                             name="mothersFirstName"
+                            value={this.state.mothersFirstName}
                         /> 
                     </div>
                     <div className="form-group col-3">
@@ -149,15 +177,16 @@ export class AddUser extends Component {
                             onChange={e=>this.handleInputChange(e)}
                         className="form-control"                        
                         name="mothersLastName"
+                        value={this.state.mothersLastName}
                         />
                     </div>    
                 </div>
                 <div className="text-center">
-                    <button onClick={this.handleSave} className="btn btn-primary mt-2 mb-2 btn-lg">Save</button>
+                    <button onClick={this.handleUpdate} className="btn btn-primary mt-2 mb-2 btn-lg">Update</button>
                 </div>
             </div>
         )
     }
 }
 
-export default AddUser
+export default EditUser

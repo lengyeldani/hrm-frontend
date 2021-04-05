@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom';
 
 export class UserTableRow extends Component {
     constructor(props){
@@ -23,6 +24,14 @@ export class UserTableRow extends Component {
                 <td>{this.props.user.address}</td>
                 <td>{this.props.user.mothersFirstName}</td>
                 <td>{this.props.user.mothersLastName}</td>
+                <td>
+                    <NavLink to={"/admin/edit/" + this.props.user.id} className="btn btn-primary btn-sm">
+                        Edit
+                    </NavLink>
+                </td>
+                <td>
+                    <button className="btn btn-danger btn-sm">Delete</button>
+                </td>
             </tr>
         )
     }

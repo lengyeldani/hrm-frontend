@@ -9,6 +9,7 @@ import Home from './Components/Home/Home'
 import AddUser from './Components/Admin/AddUser';
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import EditUser from './Components/Admin/EditUser';
 
 
 class App extends Component {
@@ -34,6 +35,7 @@ class App extends Component {
             <Route path="/" exact render={(props)=><Home/>}></Route>
             <Route path="/admin" exact strict render={(props)=><Admin/>}></Route>
             <Route path="/admin/addUser" exact strict render={(props)=><AddUser/>}></Route>
+            <Route path="/admin/edit/:id" exact strict render={(props)=><EditUser {...props}/>}></Route>
            </Switch> 
          </div>
         <Footer/>

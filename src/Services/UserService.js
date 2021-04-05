@@ -54,3 +54,22 @@ export function addUser(data) {
         body:JSON.stringify(data)
     })
 }
+
+export function updateUser(data,id) {
+    const url = apiEndpoint + 'users/update/'+id;
+
+    return fetch(url, {
+        headers,
+        method:'PUT',
+        body:JSON.stringify(data)
+    })
+}
+
+export function getUserById(id) {
+    const url = apiEndpoint + 'users/show/'+id;
+
+    return fetch(url, {
+        headers,
+        method:'GET'
+    })
+}

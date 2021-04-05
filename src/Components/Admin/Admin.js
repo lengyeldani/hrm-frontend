@@ -70,6 +70,8 @@ export class Admin extends Component {
                             <th>address</th>
                             <th>mother's fname</th>
                             <th>mother's lname</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>

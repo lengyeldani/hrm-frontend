@@ -26,3 +26,31 @@ export function getUsers() {
         method:'GET'
     })
 }
+
+export function getRoles(){
+    const url = apiEndpoint + 'users/roles';
+
+    return fetch(url, {
+        headers,
+        method:'GET'
+    })
+}
+
+export function getDepartments() {
+    const url = apiEndpoint + 'users/departments';
+
+    return fetch(url, {
+        headers,
+        method:'GET'
+    })
+}
+
+export function addUser(data) {
+    const url = apiEndpoint + 'users/store';
+
+    return fetch(url, {
+        headers,
+        method:'POST',
+        body:JSON.stringify(data)
+    })
+}

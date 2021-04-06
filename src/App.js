@@ -35,7 +35,7 @@ class App extends Component {
             <Route path="/" exact render={(props)=><Home/>}></Route>
             <Route path="/admin" exact strict render={(props)=><Admin/>}></Route>
             <Route path="/admin/addUser" exact strict render={(props)=><AddUser/>}></Route>
-            <Route path="/admin/edit/:id" exact strict render={(props)=><EditUser {...props}/>}></Route>
+            <Route path="/admin/edit/:id" exact strict render={(props)=><EditUser {...props}/>}></Route>            
            </Switch> 
          </div>
         <Footer/>

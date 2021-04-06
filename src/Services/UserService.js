@@ -17,8 +17,8 @@ export function getLoggedInUser() {
     })
 }
 
-export function getUsers() {
-    const url = apiEndpoint + 'users/index';
+export function getUsers(current_page) {
+    const url = apiEndpoint + 'users/index?page=' + current_page;
 
     return fetch(url, {
         //...fetchOptions,
@@ -71,5 +71,14 @@ export function getUserById(id) {
     return fetch(url, {
         headers,
         method:'GET'
+    })
+}
+
+export function deleteUser(id) {
+    const url = apiEndpoint + 'users/delete/'+id;
+
+    return fetch(url, {
+        headers,
+        method:'DELETE'
     })
 }

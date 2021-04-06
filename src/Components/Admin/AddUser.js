@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import UserRoleOptions from './UserRoleOptions';
+import {toast} from 'react-toastify'
 import {getRoles, getDepartments, addUser} from '../../Services/UserService'
 import UserDepartmentOptions from './UserDepartmentOptions';
-import {toast} from 'react-toastify'
 
 
 export class AddUser extends Component {

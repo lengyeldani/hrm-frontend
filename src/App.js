@@ -10,7 +10,7 @@ import AddUser from './Components/Admin/AddUser';
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import EditUser from './Components/Admin/EditUser';
-import Scheduler from './Components/Scheduler/Scheduler';
+import Vacation from './Components/Vacation/Vacation';
 import Loader from './Components/Common/Loader';
 
 
@@ -51,7 +51,7 @@ class App extends Component {
            <Switch>
             <Route path="/" exact render={(props)=><Home/>}></Route>
             <Route path="/admin" exact strict render={(props)=><Admin/>}></Route>
-            <Route path="/scheduler" exact strict render={(props)=><Scheduler/>}></Route>
+            <Route path="/vacation" exact strict render={(props)=><Vacation loggedInUser={this.state.loggedInUser}/>}></Route>
             <Route path="/admin/addUser" exact strict render={(props)=><AddUser/>}></Route>
             <Route path="/admin/edit/:id" exact strict render={(props)=><EditUser {...props}/>}></Route>            
            </Switch> 

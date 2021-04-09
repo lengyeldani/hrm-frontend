@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import {getUsers} from '../../Services/UserService'
 import UserTableRows from './UserTableRows';
 import ReactLoader from 'react-loader-spinner'
-import { NavLink } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
+import { NavLink } from 'react-router-dom';
 
 
 export class Admin extends Component {
@@ -12,9 +12,9 @@ export class Admin extends Component {
         super(props);
         this.state = {
             users:[],
+            dataLoaded:false,
             links:{},
             meta:{},
-            dataLoaded:false,
             per_page:10,
             current_page:1,
             last_page:1

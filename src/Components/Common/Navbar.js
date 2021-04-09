@@ -22,8 +22,8 @@ export class Navbar extends Component {
                     </NavLink>
                     </li>
                     <li className="nav-item">
-                    <NavLink to={"/scheduler"} className="nav-link">
-                        Scheduler
+                    <NavLink to={"/vacation"} className="nav-link">
+                        Vacation
                     </NavLink>
                     </li>
                     <li className="nav-item">
@@ -37,7 +37,11 @@ export class Navbar extends Component {
                     </li>
                     </ul>
                     <div className="d-flex">
-                        <span className="text-white">Logged in: {this.props.loggedInUser.username}</span>
+                        <span className="text-white">
+                        {this.props.loggedInUser.firstName} {this.props.loggedInUser.lastName} |
+                        </span>
+                        <span className="text-white ml-2">
+                        {this.props.loggedInUser.username}</span>
                     </div>
                 </div>
             </nav>

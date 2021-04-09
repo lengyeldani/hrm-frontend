@@ -27,7 +27,6 @@ export class EditUser extends Component {
     }
     
     componentDidMount(){
-        console.log(this.props.user)
         getRoles()
         .then(response => response.json()
         .then(roles => this.setState({roles})))   

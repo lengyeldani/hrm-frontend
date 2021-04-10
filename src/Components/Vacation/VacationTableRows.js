@@ -8,8 +8,7 @@ export class VacationTableRows extends Component {
                 <VacationTableRow
                 getAllVacation={this.props.getAllVacation}
                 key={v.id}
-                vacation={v}
-                vacationStatuses={this.props.vacationStatuses}
+                vacation={v}                
                 />
             ))
         )

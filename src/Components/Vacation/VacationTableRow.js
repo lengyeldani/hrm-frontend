@@ -30,7 +30,7 @@ export class VacationTableRow extends Component {
     }
 
     renderCancelBtn = ()=> {
-        if(this.props.vacation.vacation_status_id !==4){
+        if(this.props.vacation.vacation_status.id !==4){
             return(
                 <button onClick={this.handleCancelVacation} className="btn btn-warning btn-sm">Cancel</button>
             )
@@ -44,7 +44,7 @@ export class VacationTableRow extends Component {
     render() {
         return (
             <tr>                
-                <td>{this.props.vacationStatuses[this.props.vacation.vacation_status_id - 1].name}</td>  
+                <td>{this.props.vacation.vacation_status.name}</td>  
                 <td>{this.props.vacation.date}</td>            
                 <td>
                     {this.renderCancelBtn()}

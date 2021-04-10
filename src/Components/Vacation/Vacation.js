@@ -12,8 +12,7 @@ export class Vacation extends Component {
         this.state= {
             dataLoaded:false,
             date:'',
-            vacations:[],
-            vacationStatuses:[],
+            vacations:[],            
             links:{},
             meta:{},
             per_page:10,
@@ -46,7 +45,7 @@ export class Vacation extends Component {
         .then(response => response.json()
         .then(data => {
             this.setState({
-                vacations:data.data,
+                vacations:data,
                 dataLoaded:true,
                 last_page:data.last_page
             })
@@ -62,8 +61,7 @@ export class Vacation extends Component {
             return(
                 <VacationTableRows                    
                     data={this.state.vacations}
-                    getAllVacation={this.refreshVacations}
-                    vacationStatuses={this.state.vacationStatuses}
+                    getAllVacation={this.refreshVacations}                   
                 />
             )
         }

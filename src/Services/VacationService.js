@@ -37,12 +37,12 @@ export function getVacationStatuses() {
     })
 }
 
-export function changeVacationStatus(data) {
-    const url = apiEndpoint + 'vacations/changeVacationStatus';
+export function changeVacationStatus(id,data) {
+    const url = apiEndpoint + 'vacations/update/' + id;
 
     return fetch(url, {
         headers,
-        method:'POST',
+        method:'PUT',
         body:JSON.stringify(data)
     })
 }

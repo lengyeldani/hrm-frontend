@@ -7,6 +7,7 @@ import Admin from './Components/Admin/Admin';
 import Footer from './Components/Common/Footer';
 import Home from './Components/Home/Home'
 import AddUser from './Components/Admin/AddUser';
+import Manager from './Components/VacationManager/Manager';
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import EditUser from './Components/Admin/EditUser';
@@ -34,8 +35,7 @@ class App extends Component {
           authenticated:true,
           loading:false
         })
-      }
-       
+      }       
     })
    
   }
@@ -51,9 +51,10 @@ class App extends Component {
            <Switch>
             <Route path="/" exact render={(props)=><Home/>}></Route>
             <Route path="/admin" exact strict render={(props)=><Admin/>}></Route>
-            <Route path="/vacation" exact strict render={(props)=><Vacation loggedInUser={this.state.loggedInUser}/>}></Route>
-            <Route path="/admin/addUser" exact strict render={(props)=><AddUser/>}></Route>
+            <Route path="/vacation" exact strict render={(props)=><Vacation loggedInUser={this.state.loggedInUser} {...props}/>}></Route>
+            <Route path="/admin/addUser" exact strict render={(props)=><AddUser {...props}/>}></Route>
             <Route path="/admin/edit/:id" exact strict render={(props)=><EditUser {...props}/>}></Route>            
+            <Route path="/vacation/manager" exact strict render={(props)=><Manager loggedInUser={this.state.loggedInUser} {...props}/>}></Route>
            </Switch> 
          </div>
         <Footer/>

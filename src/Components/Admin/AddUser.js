@@ -20,6 +20,7 @@ export class AddUser extends Component {
             address:'',
             mothersFirstName:'',
             mothersLastName:'',
+            maxVacation:'',
             roles:[],
             departments:[]
         }
@@ -51,13 +52,17 @@ export class AddUser extends Component {
             zipCode: this.state.zipCode,
             address: this.state.address,
             mothersFirstName: this.state.mothersFirstName,
-            mothersLastName: this.state.mothersLastName
+            mothersLastName: this.state.mothersLastName,
+            vacationCounter_max:this.state.maxVacation
         }
 
         addUser(data)
         .then(response => {
             if (response.ok) {
                 toast.success('User added successfully!')
+            }
+            else{
+                toast.warning('Couldn\'t save the user.')
             }
         })
     }
@@ -150,7 +155,15 @@ export class AddUser extends Component {
                         className="form-control"                        
                         name="mothersLastName"
                         />
-                    </div>    
+                    </div>
+                    <div className="form-group col-3">
+                        <label>maximum vacations:</label>
+                        <input 
+                            onChange={e=>this.handleInputChange(e)}
+                            className="form-control"                        
+                            name="maxVacation"
+                        />
+                    </div>        
                 </div>
                 <div className="text-center">
                     <button onClick={this.handleSave} className="btn btn-primary mt-2 mb-2 btn-lg">Save</button>

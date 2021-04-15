@@ -11,7 +11,8 @@ export class Vacation extends Component {
         super(props);
         this.state= {
             dataLoaded:false,
-            date:'',
+            start:'',
+            end:'',
             vacations:[],            
             links:{},
             meta:{},
@@ -25,7 +26,8 @@ export class Vacation extends Component {
     handleRequestVacation = () => {
         let data = {
             'userId': this.props.loggedInUser.id,
-            'date':this.state.date
+            'start':this.state.start,
+            'end':this.state.end
         }
         addVacation(data)
         .then(request => {
@@ -45,7 +47,7 @@ export class Vacation extends Component {
         .then(response => response.json()
         .then(data => {
             this.setState({
-                vacations:data,
+                vacations:data.data,
                 dataLoaded:true,
                 last_page:data.last_page
             })
@@ -101,8 +103,12 @@ export class Vacation extends Component {
                 <h3 className="mb-5 mt-2">Vacation</h3>
                 <div className="row align-items-end mb-3">
                     <div className="col-3">
-                    <label>Date:</label>
-                        <input className="form-control" value={this.state.date} onChange={e => this.setState({date:e.target.value})} type="date"/>
+                    <label>Start:</label>
+                        <input className="form-control" value={this.state.start} onChange={e => this.setState({start:e.target.value})} type="date"/>
+                    </div>
+                    <div className="col-3">
+                    <label>End:</label>
+                        <input className="form-control" value={this.state.end} onChange={e => this.setState({end:e.target.value})} type="date"/>
                     </div>
                     <div className="col-2 ">
                         <button onClick={this.handleRequestVacation} className="btn btn-primary">Request vacation</button>
@@ -112,7 +118,8 @@ export class Vacation extends Component {
                     <thead>
                         <tr>
                             <th>status</th>
-                            <th>date</th>
+                            <th>start</th>
+                            <th>end</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -127,7 +134,7 @@ export class Vacation extends Component {
                     pageRangeDisplayed={2}
                     marginPagesDisplayed={1}  
                     pageLinkClassName={'page-link'}                 
-                    pageCount={this.state.meta.last_page}                   
+                    pageCount={this.state.last_page}                   
                     onPageChange={this.handlePageClick}
                     containerClassName={'pagination'}
                     activeClassName={'active'}

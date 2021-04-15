@@ -6,7 +6,7 @@ export class Navbar extends Component {
             <div>
             <nav className="navbar navbar-expand-md navbar-dark bg-dark">
                 <a className="navbar-brand" href="#">HRManager</a>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <button className="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
                    <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarsExampleDefault">
@@ -24,6 +24,11 @@ export class Navbar extends Component {
                     <li className="nav-item">
                     <NavLink to={"/vacation"} className="nav-link">
                         Vacation
+                    </NavLink>
+                    </li>
+                    <li className="nav-item">
+                    <NavLink to={"/vacation/manager"} className="nav-link">
+                        Manager
                     </NavLink>
                     </li>
                     <li className="nav-item">

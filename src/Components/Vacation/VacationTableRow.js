@@ -3,21 +3,13 @@ import { toast } from 'react-toastify';
 import {changeVacationStatus} from '../../Services/VacationService'
 
 export class VacationTableRow extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-           
-        }
-       
-    }
-
+   
     handleCancelVacation = () => {
-        let data = {
-            'vacation_id':this.props.vacation.id,
-            'status_id':4
+        let data = {            
+            'vacationStatus':4
         }
 
-        changeVacationStatus(data)
+        changeVacationStatus(this.props.vacation.id,data)
         .then(response => {
             if(response.ok){
                 toast.success('Vacation request cancelled.');
@@ -45,7 +37,8 @@ export class VacationTableRow extends Component {
         return (
             <tr>                
                 <td>{this.props.vacation.vacation_status.name}</td>  
-                <td>{this.props.vacation.date}</td>            
+                <td>{this.props.vacation.start}</td>     
+                <td>{this.props.vacation.end}</td>        
                 <td>
                     {this.renderCancelBtn()}
                 </td>

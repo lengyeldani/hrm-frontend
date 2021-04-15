@@ -1,54 +1,50 @@
-import React, { Component } from 'react'
-import {getUsers} from '../../Services/UserService'
-import UserTableRows from './UserTableRows';
+import React, { Component } from 'react';
+import ManagerTableRows from '../VacationManager/ManagerTableRows';
 import ReactLoader from 'react-loader-spinner'
 import ReactPaginate from 'react-paginate';
-import { NavLink } from 'react-router-dom';
+import {employeesByDepartment} from '../../Services/UserService'
 
+export class Manager extends Component {
 
-export class Admin extends Component {
-
-    constructor(props){
-        super(props);
+    constructor(props) {
+        super(props)
         this.state = {
-            users:[],
             dataLoaded:false,
-            links:{},
-            meta:{},
-            per_page:10,
+            users:[],
             current_page:1,
-            last_page:1
+            last_page:''
         }
     }
 
-    componentDidMount = () => {
-      this.getAllUser()
-    }
-
-    getAllUser = () => {
-        getUsers(this.state.current_page)
+    getAllEmployee = () => {
+        employeesByDepartment(this.state.current_page)
         .then(response => response.json())
-        .then(data => this.setState({
-            users:data.data,
-            last_page:data.last_page
-        }))
-        .finally(()=> this.setState({dataLoaded:true}))
+        .then(data => {
+            this.setState({
+                users:data.data,
+                last_page:data.last_page
+            })
+        })
+        .then(this.setState({dataLoaded:true}))
     }
 
-    
+    componentDidMount(){
+        this.getAllEmployee()
+    }
+
     renderTable = () => {
         if (this.state.dataLoaded && this.state.users.length>0) {
             return(
-                <UserTableRows                    
+                <ManagerTableRows                    
                     data={this.state.users}
-                    getAllUser={this.getAllUser}
+                    getAllEmployee={this.getAllEmployee}
                 />
             )
         }
         else{
             return(
                 <tr>
-                    <td className="text-center" colSpan="11">
+                    <td className="text-center" colSpan="7">
                         <ReactLoader type="ThreeDots" color="#888888" height="50" width="50"/>
                     </td>
                 </tr>
@@ -56,10 +52,8 @@ export class Admin extends Component {
         }
     }
 
-    
-
     handlePageClick = (selectedObject)=> {        
-        getUsers(selectedObject.selected +1)
+        this.getAllEmployee(selectedObject.selected +1)
         .then(response => response.json())
         .then(data => this.setState({
             users:data.data,
@@ -72,27 +66,17 @@ export class Admin extends Component {
     render() {
         return (
             <div>
-                <h3>Admin Page</h3>               
-                <NavLink to={"/admin/addUser"} className="btn btn-primary mb-2">
-                      Add new user
-                </NavLink>
-               
+                <h3>Manager</h3>
                 <table className="table table-hover">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>username</th>
-                            <th>role</th>
-                            <th>department</th>
+                            <th>username</th>                            
                             <th>first name</th>
-                            <th>last name</th>
-                            <th>date of birth</th>
-                            <th>zip code</th>
-                            <th>address</th>
-                            <th>mother's fname</th>
-                            <th>mother's lname</th>
-                            <th></th>
-                            <th></th>
+                            <th>last name</th>                            
+                            <th>maximum vacations</th>
+                            <th>used vacations</th>
+                            <th>remaining vacations</th>                            
                         </tr>
                     </thead>
                     <tbody>
@@ -117,10 +101,10 @@ export class Admin extends Component {
                     previousLinkClassName={'page-link'}
                     nextLinkClassName={'page-link'}
                     
-                />               
+                />
             </div>
         )
     }
 }
 
-export default Admin
+export default Manager

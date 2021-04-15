@@ -74,6 +74,16 @@ export function getUserById(id) {
     })
 }
 
+export function employeesByDepartment(current_page) {
+    const url = apiEndpoint + 'users/employeesByDepartment?page=' + current_page;
+
+    return fetch(url, {
+        //...fetchOptions,
+        headers,
+        method:'GET'
+    })
+}
+
 export function deleteUser(id) {
     const url = apiEndpoint + 'users/delete/'+id;
 

@@ -22,6 +22,9 @@ export class ManagerEdit extends Component {
             last_page:'',
             start:'',
             end:'',
+            max:'',
+            used:'',
+            remaining:''
         }      
     }
 
@@ -38,8 +41,7 @@ export class ManagerEdit extends Component {
                 vacations:data.data,
                 last_page:data.last_page                
             })
-        })
-        .then(this.setState({dataLoaded:true}))
+        })        
 
         getUserById(id)
         .then(response => response.json())
@@ -48,9 +50,13 @@ export class ManagerEdit extends Component {
                 firstName:data.firstName,
                 lastName:data.lastName,
                 username:data.username,
-                id:data.id
+                id:data.id,
+                max:data.vacation_counter.max,
+                used:data.vacation_counter.used,
+                remaining:data.vacation_counter.remaining
             })
-        })        
+        })
+        .then(this.setState({dataLoaded:true}))        
     }
 
     handlePageClick = (selectedObject)=> {        
@@ -83,6 +89,10 @@ export class ManagerEdit extends Component {
 
         this.getData(this.state.current_page)
     }
+
+    refreshData = () => {
+        this.getData(this.state.current_page)
+    }
     
 
     renderTable = () => {
@@ -90,7 +100,7 @@ export class ManagerEdit extends Component {
             return (
                 <ManagerEditTableRows
                 data={this.state.vacations}                
-                refreshData={this.getData}
+                refreshData={this.refreshData}
                 />
                 )
             }
@@ -111,7 +121,7 @@ export class ManagerEdit extends Component {
             
             <div>                
                 <h3 className="mb-5 mt-2">Alkalmazott szabadságai</h3>
-                <div className="row align-items-end p-3 mb-3 border-top border-bottom">
+                <div className="row align-items-end p-3 mb-3 border-top">
                     <div className="col-4">
                         <label>Felhasználónév:</label>
                         <input className="form-control" type="text" value={this.state.username} readOnly></input>
@@ -123,6 +133,20 @@ export class ManagerEdit extends Component {
                     <div className="col-4">
                         <label>Vezetéknév:</label>
                         <input className="form-control" type="text" value={this.state.lastName} readOnly></input>
+                    </div>
+                </div>
+                <div className="row align-items-end p-3 mb-3 border-bottom">
+                    <div className="col-4">
+                        <label>összes szabadság:</label>
+                        <input className="form-control" type="text" value={this.state.max} readOnly></input>
+                    </div>
+                    <div className="col-4">
+                        <label>felhasznált szabadság:</label>
+                        <input className="form-control" type="text" value={this.state.used} readOnly></input>
+                    </div>
+                    <div className="col-4">
+                        <label>maradék szabadság:</label>
+                        <input className="form-control" type="text" value={this.state.remaining} readOnly></input>
                     </div>
                 </div>
                 <div className="row align-items-end mb-3 p-3">

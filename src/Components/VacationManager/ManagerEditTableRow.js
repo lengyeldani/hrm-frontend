@@ -11,12 +11,14 @@ export class ManagerEditTableRow extends Component {
         this.state ={
             vacationStatuses:[],
             dataLoaded:false,
-            newStatus:'',
+            status:'',
             id:''
         }
     }
 
     componentDidMount(){
+        this.setState({status: this.props.vacation.vacation_status.id})
+
         getVacationStatuses()
         .then(response => response.json())
         .then(data => this.setState({vacationStatuses:data, id:this.props.vacation.id}))
@@ -25,21 +27,22 @@ export class ManagerEditTableRow extends Component {
 
     handleStatusChange = (e) => {
         this.setState({
-            newStatus:e.target.value
+            status:e.target.value
         })
         let data = {
             vacationStatus:e.target.value
         }
+        console.log(this.state.id,data)
         changeVacationStatus(this.state.id,data)
         .then(response => {
-            if(response.ok){
+            if(response.status === 200){
                 toast.success('Sikeres változtatás a szabadság státuszban.')
             }
             else{
                 toast.warning('Sikertelen művelet.')
             }
         })
-        .then(this.props.refreshData)
+        .then(this.props.refreshData())
     }
 
     render() {
@@ -49,7 +52,7 @@ export class ManagerEditTableRow extends Component {
                 <td>{this.props.vacation.start}</td>     
                 <td>{this.props.vacation.end}</td>        
                 <td>
-                   <select onChange={e => this.handleStatusChange(e)} value={this.props.vacation.vacation_status.id} className="form-control col-3">
+                   <select onChange={e => this.handleStatusChange(e)} value={this.state.status} className="form-control col-3">
                        <VacationStatusOptions vacationStatuses={this.state.vacationStatuses}/>
                    </select>
                 </td>

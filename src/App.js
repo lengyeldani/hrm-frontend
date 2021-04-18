@@ -41,15 +41,29 @@ class App extends Component {
    
   }
 
-  renderContent = () => {
-    if (this.state.authenticated){
-      return(
-      <BrowserRouter>
-       <div>
-        <Navbar loggedInUser={this.state.loggedInUser}/>
-          <div className="container-fluid">
-          <ToastContainer/>
-           <Switch>
+  renderRoute = () => {
+    if(this.state.authenticated){
+      switch (this.state.loggedInUser.role_id) {
+        case 1 || 2 || 3:
+          return (
+            <Switch>
+              <Route path="/" exact render={(props)=><Home/>}></Route>              
+              <Route path="/vacation" exact strict render={(props)=><Vacation loggedInUser={this.state.loggedInUser} {...props}/>}></Route>                                                   
+           </Switch> 
+          )          
+        case 4:
+          return(
+            <Switch>
+              <Route path="/" exact render={(props)=><Home/>}></Route>
+              <Route path="/admin" exact strict render={(props)=><Admin {...props}/>}></Route>
+              <Route path="/vacation" exact strict render={(props)=><Vacation loggedInUser={this.state.loggedInUser} {...props}/>}></Route>                      
+              <Route path="/vacation/manager" exact strict render={(props)=><Manager loggedInUser={this.state.loggedInUser} {...props}/>}></Route>
+              <Route path="/vacation/manager/edit/:id" exact strict  render={(props)=><ManagerEdit loggedInUser={this.state.loggedInUser} {...props} />}></Route>
+           </Switch> 
+          )
+        case 5:
+          return(
+            <Switch>
             <Route path="/" exact render={(props)=><Home/>}></Route>
             <Route path="/admin" exact strict render={(props)=><Admin {...props}/>}></Route>
             <Route path="/vacation" exact strict render={(props)=><Vacation loggedInUser={this.state.loggedInUser} {...props}/>}></Route>
@@ -58,6 +72,31 @@ class App extends Component {
             <Route path="/vacation/manager" exact strict render={(props)=><Manager loggedInUser={this.state.loggedInUser} {...props}/>}></Route>
             <Route path="/vacation/manager/edit/:id" exact strict  render={(props)=><ManagerEdit loggedInUser={this.state.loggedInUser} {...props} />}></Route>
            </Switch> 
+          )
+        default:
+          break;
+      }
+    }
+  }
+
+  renderContent = () => {
+    if (this.state.authenticated){
+      return(
+      <BrowserRouter>
+       <div>
+        <Navbar loggedInUser={this.state.loggedInUser}/>
+          <div className="container-fluid">
+          <ToastContainer/>
+           {/* <Switch>
+            <Route path="/" exact render={(props)=><Home/>}></Route>
+            <Route path="/admin" exact strict render={(props)=><Admin {...props}/>}></Route>
+            <Route path="/vacation" exact strict render={(props)=><Vacation loggedInUser={this.state.loggedInUser} {...props}/>}></Route>
+            <Route path="/admin/addUser" exact strict render={(props)=><AddUser {...props}/>}></Route>
+            <Route path="/admin/edit/:id" exact strict render={(props)=><EditUser {...props}/>}></Route>            
+            <Route path="/vacation/manager" exact strict render={(props)=><Manager loggedInUser={this.state.loggedInUser} {...props}/>}></Route>
+            <Route path="/vacation/manager/edit/:id" exact strict  render={(props)=><ManagerEdit loggedInUser={this.state.loggedInUser} {...props} />}></Route>
+           </Switch>  */}
+           {this.renderRoute()}
          </div>
         <Footer/>
        </div>

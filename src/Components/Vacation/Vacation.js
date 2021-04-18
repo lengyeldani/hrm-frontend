@@ -26,7 +26,6 @@ export class Vacation extends Component {
         }
         
     }
-
    
     refreshUserData = () => {
         getUserById(this.props.loggedInUser.id)
@@ -66,9 +65,7 @@ export class Vacation extends Component {
             this.getAllVacation(this.state.current_page)
             this.refreshUserData()
         }
-        )
-
-        
+        )        
     }
 
     getAllVacation = (current_page) => {

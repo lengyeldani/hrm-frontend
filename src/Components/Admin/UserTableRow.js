@@ -31,7 +31,7 @@ export class UserTableRow extends Component {
             <tr>
                 <td>{this.props.user.id}</td>
                 <td>{this.props.user.username}</td>
-                <td>{this.props.user.role_id}</td>
+                <td>{this.props.user.role.name}</td>
                 <td>{this.props.user.department_id}</td>
                 <td>{this.props.user.firstName}</td>
                 <td>{this.props.user.lastName}</td>
@@ -40,8 +40,8 @@ export class UserTableRow extends Component {
                 <td>{this.props.user.address}</td>
                 <td>{this.props.user.mothersFirstName}</td>
                 <td>{this.props.user.mothersLastName}</td>
-                <td>{this.props.user.vacation_counter.max}</td>
-                <td>{this.props.user.vacation_counter.used}</td>
+                <td>{this.props.user.vacationCounter.max}</td>
+                <td>{this.props.user.vacationCounter.used}</td>
                 <td>                    
                     <NavLink to={{
                         pathname:"/admin/edit/" + this.props.user.id,

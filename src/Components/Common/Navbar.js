@@ -33,13 +33,7 @@ export class Navbar extends Component {
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#">Worktime</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">About</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Contact</a>
-                    </li>
+                    </li>                    
                     </ul>
                     <div className="d-flex">
                         <span className="text-white">

@@ -8,7 +8,8 @@ export class ManagerTableRows extends Component {
                 <ManagerTableRow
                 getAllEmployee={this.props.getAllEmployee}
                 key={e.id}
-                employee={e}                
+                employee={e}   
+                clickedEmployee={this.props.clickedEmployee}             
                 />
             ))
         )

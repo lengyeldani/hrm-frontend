@@ -32,7 +32,11 @@ export class UserTableRow extends Component {
                 <td>{this.props.user.mothersFirstName}</td>
                 <td>{this.props.user.mothersLastName}</td>
                 <td>                    
-                    <NavLink to={"/admin/edit/" + this.props.user.id} className="btn btn-primary btn-sm">
+                    <NavLink to={{
+                        pathname:"/admin/edit/" + this.props.user.id,
+                        user:this.props.user                        
+                        }}  
+                        className="btn btn-primary btn-sm">
                         Edit
                     </NavLink>
                 </td>

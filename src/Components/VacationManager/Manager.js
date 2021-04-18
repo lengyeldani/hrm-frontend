@@ -4,6 +4,7 @@ import ReactLoader from 'react-loader-spinner'
 import ReactPaginate from 'react-paginate';
 import {employeesByDepartment} from '../../Services/UserService'
 
+
 export class Manager extends Component {
 
     constructor(props) {
@@ -13,6 +14,7 @@ export class Manager extends Component {
             users:[],
             current_page:1,
             last_page:''
+           
         }
     }
 
@@ -28,16 +30,20 @@ export class Manager extends Component {
         .then(this.setState({dataLoaded:true}))
     }
 
+   
     componentDidMount(){
         this.getAllEmployee()
+        //console.log(this.props.history)
     }
 
-    renderTable = () => {
+  
+    renderManagerTable = () => {
         if (this.state.dataLoaded && this.state.users.length>0) {
             return(
                 <ManagerTableRows                    
                     data={this.state.users}
                     getAllEmployee={this.getAllEmployee}
+                    clickedEmployee={this.clickedEmployee}
                 />
             )
         }
@@ -63,8 +69,8 @@ export class Manager extends Component {
         .finally(()=> this.setState({dataLoaded:true}))
     }
 
-    render() {
-        return (
+    render() {        
+        return(
             <div>
                 <h3>Manager</h3>
                 <table className="table table-hover">
@@ -76,11 +82,13 @@ export class Manager extends Component {
                             <th>last name</th>                            
                             <th>maximum vacations</th>
                             <th>used vacations</th>
-                            <th>remaining vacations</th>                            
+                            <th>remaining vacations</th> 
+                            <th>pending</th>  
+                            <th></th>                         
                         </tr>
                     </thead>
                     <tbody>
-                        {this.renderTable()}
+                        {this.renderManagerTable()}
                     </tbody>
                 </table>
                 <ReactPaginate
@@ -103,8 +111,8 @@ export class Manager extends Component {
                     
                 />
             </div>
-        )
-    }
+        )}        
+    
 }
 
 export default Manager

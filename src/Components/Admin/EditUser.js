@@ -20,13 +20,15 @@ export class EditUser extends Component {
             address:'',
             mothersFirstName:'',
             mothersLastName:'',
+            maxVacation:'',
             roles:[],
             departments:[]
         }
-        
+                
     }
     
     componentDidMount(){
+        
         getRoles()
         .then(response => response.json()
         .then(roles => this.setState({roles})))   
@@ -51,6 +53,7 @@ export class EditUser extends Component {
             address:user.address,
             mothersFirstName:user.mothersFirstName,
             mothersLastName:user.mothersLastName,
+            maxVacation:user.vacationCounter_max
         }))
         
     }
@@ -70,7 +73,8 @@ export class EditUser extends Component {
             zipCode: this.state.zipCode,
             address: this.state.address,
             mothersFirstName: this.state.mothersFirstName,
-            mothersLastName: this.state.mothersLastName
+            mothersLastName: this.state.mothersLastName,
+            vacationCounter_max:this.state.maxVacation
         }
 
         updateUser(data,this.state.id)
@@ -179,7 +183,16 @@ export class EditUser extends Component {
                         name="mothersLastName"
                         value={this.state.mothersLastName}
                         />
-                    </div>    
+                    </div>  
+                    <div className="form-group col-3">
+                        <label>maximum vacations:</label>
+                        <input 
+                            onChange={e=>this.handleInputChange(e)}
+                            className="form-control"                        
+                            name="maxVacation"
+                            value={this.state.maxVacation}
+                        />
+                    </div>       
                 </div>
                 <div className="text-center">
                     <button onClick={this.handleUpdate} className="btn btn-primary mt-2 mb-2 btn-lg">Update</button>

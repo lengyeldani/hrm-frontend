@@ -46,3 +46,12 @@ export function changeVacationStatus(id,data) {
         body:JSON.stringify(data)
     })
 }
+
+export function showByUser(id, current_page) {
+    const url = apiEndpoint + 'vacations/showByUser/' + id + '?page='+ current_page;
+
+    return fetch(url, {
+        headers,
+        method:'GET'
+    })
+}

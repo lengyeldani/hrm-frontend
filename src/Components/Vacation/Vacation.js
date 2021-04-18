@@ -27,7 +27,8 @@ export class Vacation extends Component {
         let data = {
             'userId': this.props.loggedInUser.id,
             'start':this.state.start,
-            'end':this.state.end
+            'end':this.state.end,
+            'vacationStatus':1
         }
         addVacation(data)
         .then(request => {

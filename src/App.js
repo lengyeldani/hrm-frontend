@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import EditUser from './Components/Admin/EditUser';
 import Vacation from './Components/Vacation/Vacation';
 import Loader from './Components/Common/Loader';
+import ManagerEdit from './Components/VacationManager/ManagerEdit';
 
 
 class App extends Component {
@@ -50,11 +51,12 @@ class App extends Component {
           <ToastContainer/>
            <Switch>
             <Route path="/" exact render={(props)=><Home/>}></Route>
-            <Route path="/admin" exact strict render={(props)=><Admin/>}></Route>
+            <Route path="/admin" exact strict render={(props)=><Admin {...props}/>}></Route>
             <Route path="/vacation" exact strict render={(props)=><Vacation loggedInUser={this.state.loggedInUser} {...props}/>}></Route>
             <Route path="/admin/addUser" exact strict render={(props)=><AddUser {...props}/>}></Route>
             <Route path="/admin/edit/:id" exact strict render={(props)=><EditUser {...props}/>}></Route>            
             <Route path="/vacation/manager" exact strict render={(props)=><Manager loggedInUser={this.state.loggedInUser} {...props}/>}></Route>
+            <Route path="/vacation/manager/edit/:id" exact strict  render={(props)=><ManagerEdit loggedInUser={this.state.loggedInUser} {...props} />}></Route>
            </Switch> 
          </div>
         <Footer/>

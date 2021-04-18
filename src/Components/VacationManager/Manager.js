@@ -32,8 +32,7 @@ export class Manager extends Component {
 
    
     componentDidMount(){
-        this.getAllEmployee()
-        //console.log(this.props.history)
+        this.getAllEmployee()        
     }
 
   
@@ -72,18 +71,18 @@ export class Manager extends Component {
     render() {        
         return(
             <div>
-                <h3>Manager</h3>
+                <h3 className="mb-5 mt-2">Szabadság kezelő</h3>
                 <table className="table table-hover">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>username</th>                            
-                            <th>first name</th>
-                            <th>last name</th>                            
-                            <th>maximum vacations</th>
-                            <th>used vacations</th>
-                            <th>remaining vacations</th> 
-                            <th>pending</th>  
+                            <th>felhasználónév</th>                            
+                            <th>keresztnév</th>
+                            <th>vezetéknév</th>                            
+                            <th>összes szabadság</th>
+                            <th>felhasznált szabadság</th>
+                            <th>felhasználható szabadság</th> 
+                            <th>függőben</th>  
                             <th></th>                         
                         </tr>
                     </thead>
@@ -92,9 +91,9 @@ export class Manager extends Component {
                     </tbody>
                 </table>
                 <ReactPaginate
-                    previousLabel={'previous'}
+                    previousLabel={'előző'}
                     previousClassName={'page-item'}
-                    nextLabel={'next'}
+                    nextLabel={'következő'}
                     pageRangeDisplayed={2}
                     marginPagesDisplayed={1}  
                     pageLinkClassName={'page-link'}                 

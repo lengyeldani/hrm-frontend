@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { toast } from 'react-toastify';
-import {changeVacationStatus} from '../../Services/VacationService'
+import {cancelVacation} from '../../Services/VacationService'
 
 export class VacationTableRow extends Component {
    
@@ -9,22 +9,23 @@ export class VacationTableRow extends Component {
             'vacationStatus':4
         }
 
-        changeVacationStatus(this.props.vacation.id,data)
+        cancelVacation(this.props.vacation.id)
         .then(response => {
             if(response.ok){
-                toast.success('Vacation request cancelled.');
+                toast.success('Szabadság sikeresen visszavonva.');
                 this.props.getAllVacation();
             }
             else{
-                toast.warning('Cannot cancel vacation request.');
+                toast.warning('Nem sikerült a szabadság visszavonása.');
             }
         })
+        .then(this.props.getAllVacation)
     }
 
     renderCancelBtn = ()=> {
         if(this.props.vacation.vacation_status.id ===1){
             return(
-                <button onClick={this.handleCancelVacation} className="btn btn-warning btn-sm">Cancel</button>
+                <button onClick={this.handleCancelVacation} className="btn btn-warning btn-sm">Visszavonás</button>
             )
         }
         else{

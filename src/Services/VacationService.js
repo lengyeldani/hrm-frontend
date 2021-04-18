@@ -28,6 +28,15 @@ export function getVacations(id, current_page) {
     })
 }
 
+export function cancelVacation(id) {
+    const url = apiEndpoint + 'vacations/cancelVacation/' + id;
+
+    return fetch(url, {
+        headers,
+        method:'GET'
+    })
+}
+
 export function getVacationStatuses() {
     const url = apiEndpoint + 'vacations/vacationStatuses';
 

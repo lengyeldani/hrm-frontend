@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {addVacation, getVacations, getVacationStatuses} from '../../Services/VacationService';
+import {getUserById} from '../../Services/UserService';
 import ReactLoader from 'react-loader-spinner'
 import ReactPaginate from 'react-paginate';
 import {toast} from 'react-toastify';
@@ -18,9 +19,25 @@ export class Vacation extends Component {
             meta:{},
             per_page:10,
             current_page:1,
-            last_page:1
+            last_page:1,
+            max:'',
+            used:'',
+            remaining:''
         }
         
+    }
+
+   
+    refreshUserData = () => {
+        getUserById(this.props.loggedInUser.id)
+        .then(response => response.json())
+        .then(data => {
+            this.setState({
+                max:data.vacation_counter.max,
+                used:data.vacation_counter.used,
+                remaining:data.vacation_counter.remaining
+            })
+        })        
     }
 
     handleRequestVacation = () => {
@@ -33,14 +50,25 @@ export class Vacation extends Component {
         addVacation(data)
         .then(request => {
             if(request.ok){
-                toast.success('Vacation request has been saved.')
+                toast.success('Szabadság igénylése sikeres!')
+            }
+            else if(request.status === 409){
+                toast.warning('Már van igényelve szabadság a megadott időszakra!')
+            }
+            else if(request.status === 400 ){
+                toast.warning('Nincs elegendő szabadság az igényléshez a megadott időszakra!')
             }
             else{
-                toast.warning('Couldn\'t save the vacation request.')
+                toast.warning('Váratlan hiba történt az igénylés során.')
             }
         })
+        .then(() => {
+            this.getAllVacation(this.state.current_page)
+            this.refreshUserData()
+        }
+        )
 
-        this.getAllVacation(this.state.current_page);
+        
     }
 
     getAllVacation = (current_page) => {
@@ -53,6 +81,7 @@ export class Vacation extends Component {
                 last_page:data.last_page
             })
         }))
+        .then(this.refreshUserData())
     }
 
     refreshVacations = () => {
@@ -89,7 +118,7 @@ export class Vacation extends Component {
         
 
         this.getAllVacation(this.state.current_page);
-
+        this.refreshUserData();
         
     }
 
@@ -101,26 +130,41 @@ export class Vacation extends Component {
     render() {
         return (
             <div>                
-                <h3 className="mb-5 mt-2">Vacation</h3>
+                <h3 className="mb-5 mt-2">Szabadságok</h3>
+               
+                <div className="row align-items-end p-3 mb-3 border-top border-bottom">
+                    <div className="col-4">
+                        <label>összes szabadság:</label>
+                        <input className="form-control" type="text" value={this.state.max} readOnly></input>
+                    </div>
+                    <div className="col-4">
+                        <label>felhasznált szabadság:</label>
+                        <input className="form-control" type="text" value={this.state.used} readOnly></input>
+                    </div>
+                    <div className="col-4">
+                        <label>maradék szabadság:</label>
+                        <input className="form-control" type="text" value={this.state.remaining} readOnly></input>
+                    </div>
+                </div>
                 <div className="row align-items-end mb-3">
                     <div className="col-3">
-                    <label>Start:</label>
+                    <label>Szabadság kezdete:</label>
                         <input className="form-control" value={this.state.start} onChange={e => this.setState({start:e.target.value})} type="date"/>
                     </div>
                     <div className="col-3">
-                    <label>End:</label>
+                    <label>Szabadság vége:</label>
                         <input className="form-control" value={this.state.end} onChange={e => this.setState({end:e.target.value})} type="date"/>
                     </div>
                     <div className="col-2 ">
-                        <button onClick={this.handleRequestVacation} className="btn btn-primary">Request vacation</button>
+                        <button onClick={this.handleRequestVacation} className="btn btn-primary">Szabadság igénylése</button>
                     </div>
                 </div>
                 <table className="table table-hover">
                     <thead>
                         <tr>
-                            <th>status</th>
-                            <th>start</th>
-                            <th>end</th>
+                            <th>státusz</th>
+                            <th>szabadság kezdete</th>
+                            <th>szabadság vége</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -129,9 +173,9 @@ export class Vacation extends Component {
                     </tbody>
                 </table>
                 <ReactPaginate
-                    previousLabel={'previous'}
+                    previousLabel={'előző'}
                     previousClassName={'page-item'}
-                    nextLabel={'next'}
+                    nextLabel={'következő'}
                     pageRangeDisplayed={2}
                     marginPagesDisplayed={1}  
                     pageLinkClassName={'page-link'}                 

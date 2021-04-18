@@ -39,7 +39,7 @@ export class ManagerTableRow extends Component {
                         employee:this.props.employee                        
                         }}  
                         className="btn btn-primary btn-sm">
-                        Edit
+                        Módosítás
                 </NavLink>               
                 </td>               
             </tr>

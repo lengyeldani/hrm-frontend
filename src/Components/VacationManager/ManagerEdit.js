@@ -61,7 +61,7 @@ export class ManagerEdit extends Component {
             current_page:selectedObject.selected,
             last_page:data.last_page
         }))
-        .finally(()=> this.setState({dataLoaded:true}))
+        .finally(this.setState({dataLoaded:true}))
     }
 
     handleRequestVacation = () => {
@@ -110,41 +110,41 @@ export class ManagerEdit extends Component {
         return (
             
             <div>                
-                <h3 className="mb-5 mt-2">MANAGER EDIT</h3>
+                <h3 className="mb-5 mt-2">Alkalmazott szabadságai</h3>
                 <div className="row align-items-end p-3 mb-3 border-top border-bottom">
                     <div className="col-4">
-                        <label>Username:</label>
+                        <label>Felhasználónév:</label>
                         <input className="form-control" type="text" value={this.state.username} readOnly></input>
                     </div>
                     <div className="col-4">
-                        <label>First name:</label>
+                        <label>Keresztnév:</label>
                         <input className="form-control" type="text" value={this.state.firstName} readOnly></input>
                     </div>
                     <div className="col-4">
-                        <label>Last name:</label>
+                        <label>Vezetéknév:</label>
                         <input className="form-control" type="text" value={this.state.lastName} readOnly></input>
                     </div>
                 </div>
                 <div className="row align-items-end mb-3 p-3">
                     <div className="col-3">
-                    <label>Start:</label>
+                    <label>Szabadság kezdete:</label>
                         <input className="form-control" value={this.state.start} onChange={e => this.setState({start:e.target.value})} type="date"/>
                     </div>
                     <div className="col-3">
-                    <label>End:</label>
+                    <label>Szabadság vége:</label>
                         <input className="form-control" value={this.state.end} onChange={e => this.setState({end:e.target.value})} type="date"/>
                     </div>
                     <div className="col-2 ">
-                        <button onClick={this.handleRequestVacation} className="btn btn-primary">Send vacation</button>
+                        <button onClick={this.handleRequestVacation} className="btn btn-primary">Szabadságra küldés</button>
                     </div>
                 </div>
                 <table className="table table-hover">
                     <thead>
                         <tr>
-                            <th>status</th>
-                            <th>start</th>
-                            <th>end</th>
-                            <th>change status</th>
+                            <th>státusz</th>
+                            <th>szabadság kezdete</th>
+                            <th>szabadság vége</th>
+                            <th>státusz módosítása</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -152,9 +152,9 @@ export class ManagerEdit extends Component {
                     </tbody>
                 </table>
                 <ReactPaginate
-                    previousLabel={'previous'}
+                    previousLabel={'előző'}
                     previousClassName={'page-item'}
-                    nextLabel={'next'}
+                    nextLabel={'következő'}
                     pageRangeDisplayed={2}
                     marginPagesDisplayed={1}  
                     pageLinkClassName={'page-link'}                 

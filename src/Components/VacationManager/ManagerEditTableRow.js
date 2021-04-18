@@ -44,8 +44,7 @@ export class ManagerEditTableRow extends Component {
 
     render() {
         return (
-            <tr>   
-                {console.log(this.props.vacation.id)}          
+            <tr>         
                 <td>{this.props.vacation.vacation_status.name}</td>  
                 <td>{this.props.vacation.start}</td>     
                 <td>{this.props.vacation.end}</td>        

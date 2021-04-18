@@ -13,27 +13,24 @@ export class Navbar extends Component {
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
                     <NavLink to={"/"} className="nav-link">
-                        Home
+                        Otthon
                     </NavLink>
                     </li>
                     <li className="nav-item">
                     <NavLink to={"/admin"} className="nav-link">
-                        Admin
+                        Adminisztrátor
                     </NavLink>
                     </li>
                     <li className="nav-item">
                     <NavLink to={"/vacation"} className="nav-link">
-                        Vacation
+                        Szabadságok
                     </NavLink>
                     </li>
                     <li className="nav-item">
                     <NavLink to={"/vacation/manager"} className="nav-link">
-                        Manager
+                        Kezelő
                     </NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Worktime</a>
-                    </li>                    
+                    </li>                                   
                     </ul>
                     <div className="d-flex">
                         <span className="text-white">

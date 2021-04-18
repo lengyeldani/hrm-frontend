@@ -72,25 +72,27 @@ export class Admin extends Component {
     render() {
         return (
             <div>
-                <h3>Admin Page</h3>               
+                <h3 className="mb-5 mt-2">Adminisztrátor felület</h3>               
                 <NavLink to={"/admin/addUser"} className="btn btn-primary mb-2">
-                      Add new user
+                      Felhasználó hozzáadása
                 </NavLink>
                
                 <table className="table table-hover">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>username</th>
-                            <th>role</th>
-                            <th>department</th>
-                            <th>first name</th>
-                            <th>last name</th>
-                            <th>date of birth</th>
-                            <th>zip code</th>
-                            <th>address</th>
-                            <th>mother's fname</th>
-                            <th>mother's lname</th>
+                            <th>felhasználónév</th>
+                            <th>jogkör</th>
+                            <th>osztály</th>
+                            <th>keresztnév</th>
+                            <th>vezetéknév</th>
+                            <th>születési dátum</th>
+                            <th>irányítószám</th>
+                            <th>cím</th>
+                            <th>anyja keresztneve</th>
+                            <th>anyja vezetékneve</th>
+                            <th>összes szabadság</th>
+                            <th>felhasznált szabadság</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -100,9 +102,9 @@ export class Admin extends Component {
                     </tbody>
                 </table>
                 <ReactPaginate
-                    previousLabel={'previous'}
+                    previousLabel={'előző'}
                     previousClassName={'page-item'}
-                    nextLabel={'next'}
+                    nextLabel={'következő'}
                     pageRangeDisplayed={2}
                     marginPagesDisplayed={1}  
                     pageLinkClassName={'page-link'}                 

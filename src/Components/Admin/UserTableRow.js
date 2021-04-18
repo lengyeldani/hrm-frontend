@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import {deleteUser} from '../../Services/UserService'
 
 export class UserTableRow extends Component {
@@ -14,6 +15,14 @@ export class UserTableRow extends Component {
 
     handleDelete = () => {
         deleteUser(this.props.user.id)
+        .then(response=> {
+            if(response.ok){
+                toast.success('Felhasználó törölve!')
+            }
+            else{
+                toast.warning('Felhasználó törlése sikertelen.')
+            }
+        })
         this.props.getAllUser()
     }
  
@@ -31,17 +40,19 @@ export class UserTableRow extends Component {
                 <td>{this.props.user.address}</td>
                 <td>{this.props.user.mothersFirstName}</td>
                 <td>{this.props.user.mothersLastName}</td>
+                <td>{this.props.user.vacation_counter.max}</td>
+                <td>{this.props.user.vacation_counter.used}</td>
                 <td>                    
                     <NavLink to={{
                         pathname:"/admin/edit/" + this.props.user.id,
                         user:this.props.user                        
                         }}  
                         className="btn btn-primary btn-sm">
-                        Edit
+                        Módosítás
                     </NavLink>
                 </td>
                 <td>
-                    <button className="btn btn-danger btn-sm" onClick={this.handleDelete}>Delete</button>
+                    <button className="btn btn-danger btn-sm" onClick={this.handleDelete}>Törlés</button>
                 </td>
             </tr>
         )

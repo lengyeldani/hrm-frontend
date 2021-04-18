@@ -80,18 +80,24 @@ export class EditUser extends Component {
         updateUser(data,this.state.id)
         .then(response => {
             if (response.ok) {
-                toast.success('User updated successfully!')
+                toast.success('Felhasználó sikeresen módosítva!')
+            }
+            else{
+                toast.success('Felhasználó módosítása sikertelen!')
             }
         })
+        .then(
+            this.props.history.push('/admin')
+        )
     }
 
     render() {
         return (
             <div>
-                <h3>Edit user</h3>
+                <h3 className="mb-5 mt-2">Felhasználó módosítása</h3>
                 <div className="row">
                     <div className="form-group col-3">
-                        <label>username:</label>
+                        <label>felhasználónév:</label>
                         <input 
                             onChange={e=>this.handleInputChange(e)}                            
                             className="form-control"                            
@@ -101,7 +107,7 @@ export class EditUser extends Component {
                         />
                     </div>                    
                     <div className="form-group col-3">
-                        <label>role:</label>
+                        <label>jogkör:</label>
                         <select
                             value={this.state.role}
                             onChange={e=>this.setState({role:e.target.value})} 
@@ -111,7 +117,7 @@ export class EditUser extends Component {
                         </select>
                     </div>
                     <div className="form-group col-3">
-                        <label>department:</label>
+                        <label>osztály:</label>
                         <select 
                             value={this.state.department}
                             className="form-control"
@@ -121,7 +127,7 @@ export class EditUser extends Component {
                         </select>
                     </div>
                     <div className="form-group col-3">
-                    <label>first name:</label>
+                    <label>keresztnév:</label>
                         <input 
                             onChange={e=>this.handleInputChange(e)}
                             className="form-control"                            
@@ -130,7 +136,7 @@ export class EditUser extends Component {
                         />
                     </div>
                     <div className="form-group col-3">
-                        <label>last name:</label>
+                        <label>vezetéknév:</label>
                         <input 
                             onChange={e=>this.handleInputChange(e)}
                             className="form-control"                            
@@ -139,7 +145,7 @@ export class EditUser extends Component {
                         />
                     </div>
                     <div className="form-group col-3">
-                        <label>date of birth:</label>
+                        <label>születési dátum:</label>
                         <input 
                             onChange={e=>this.handleInputChange(e)}
                             className="form-control"                            
@@ -149,7 +155,7 @@ export class EditUser extends Component {
                         />
                     </div>
                     <div className="form-group col-3">
-                        <label>zip code:</label>
+                        <label>irányítószám:</label>
                         <input 
                             onChange={e=>this.handleInputChange(e)}
                             className="form-control"                            
@@ -158,7 +164,7 @@ export class EditUser extends Component {
                         />
                     </div>
                     <div className="form-group col-3">
-                        <label>address:</label>
+                        <label>cím:</label>
                         <input 
                             onChange={e=>this.handleInputChange(e)}
                             className="form-control"                            
@@ -167,7 +173,7 @@ export class EditUser extends Component {
                         />
                     </div>
                     <div className="form-group col-3">
-                        <label>mother's first name:</label>
+                        <label>anyja keresztneve:</label>
                         <input 
                             onChange={e=>this.handleInputChange(e)}
                             className="form-control"                            
@@ -176,7 +182,7 @@ export class EditUser extends Component {
                         /> 
                     </div>
                     <div className="form-group col-3">
-                        <label>mother's last name</label>
+                        <label>anyja vezetékneve</label>
                         <input 
                             onChange={e=>this.handleInputChange(e)}
                         className="form-control"                        
@@ -185,7 +191,7 @@ export class EditUser extends Component {
                         />
                     </div>  
                     <div className="form-group col-3">
-                        <label>maximum vacations:</label>
+                        <label>összes szabadság:</label>
                         <input 
                             onChange={e=>this.handleInputChange(e)}
                             className="form-control"                        
@@ -195,7 +201,7 @@ export class EditUser extends Component {
                     </div>       
                 </div>
                 <div className="text-center">
-                    <button onClick={this.handleUpdate} className="btn btn-primary mt-2 mb-2 btn-lg">Update</button>
+                    <button onClick={this.handleUpdate} className="btn btn-primary mt-2 mb-2 btn-lg">Módosítás</button>
                 </div>
             </div>
         )

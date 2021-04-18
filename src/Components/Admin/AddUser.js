@@ -3,6 +3,7 @@ import UserRoleOptions from './UserRoleOptions';
 import {toast} from 'react-toastify'
 import {getRoles, getDepartments, addUser} from '../../Services/UserService'
 import UserDepartmentOptions from './UserDepartmentOptions';
+import { withRouter } from "react-router";
 
 
 export class AddUser extends Component {
@@ -59,21 +60,24 @@ export class AddUser extends Component {
         addUser(data)
         .then(response => {
             if (response.ok) {
-                toast.success('User added successfully!')
+                toast.success('Felhasználó hozzáadása sikeres!')
             }
             else{
-                toast.warning('Couldn\'t save the user.')
+                toast.warning('Nem sikerült hozzáadni a felhasználót!')
             }
         })
+        .then(
+            this.props.history.push('/admin')  
+        )
     }
 
     render() {
         return (
             <div>
-                <h3>Add new user</h3>
+                <h3 className="mb-5 mt-2">Felhasználó hozzáadása</h3>
                 <div className="row">
                     <div className="form-group col-3">
-                        <label>username:</label>
+                        <label>felhasználónév:</label>
                         <input 
                             onChange={e=>this.handleInputChange(e)}                            
                             className="form-control"                            
@@ -82,7 +86,7 @@ export class AddUser extends Component {
                         />
                     </div>                    
                     <div className="form-group col-3">
-                        <label>role:</label>
+                        <label>jogkör:</label>
                         <select
                             onChange={e=>this.setState({role:e.target.value})} 
                             className="form-control">
@@ -91,7 +95,7 @@ export class AddUser extends Component {
                         </select>
                     </div>
                     <div className="form-group col-3">
-                        <label>department:</label>
+                        <label>osztály:</label>
                         <select 
                             className="form-control"
                             onChange={e => this.setState({department:e.target.value})}>
@@ -100,7 +104,7 @@ export class AddUser extends Component {
                         </select>
                     </div>
                     <div className="form-group col-3">
-                    <label>first name:</label>
+                    <label>keresztnév:</label>
                         <input 
                             onChange={e=>this.handleInputChange(e)}
                             className="form-control"                            
@@ -108,7 +112,7 @@ export class AddUser extends Component {
                         />
                     </div>
                     <div className="form-group col-3">
-                        <label>last name:</label>
+                        <label>vezetéknév:</label>
                         <input 
                             onChange={e=>this.handleInputChange(e)}
                             className="form-control"                            
@@ -116,7 +120,7 @@ export class AddUser extends Component {
                         />
                     </div>
                     <div className="form-group col-3">
-                        <label>date of birth:</label>
+                        <label>születési dátum:</label>
                         <input 
                             onChange={e=>this.handleInputChange(e)}
                             className="form-control"                            
@@ -125,7 +129,7 @@ export class AddUser extends Component {
                         />
                     </div>
                     <div className="form-group col-3">
-                        <label>zip code:</label>
+                        <label>irányítószám:</label>
                         <input 
                             onChange={e=>this.handleInputChange(e)}
                             className="form-control"                            
@@ -133,7 +137,7 @@ export class AddUser extends Component {
                         />
                     </div>
                     <div className="form-group col-3">
-                        <label>address:</label>
+                        <label>cím:</label>
                         <input 
                             onChange={e=>this.handleInputChange(e)}
                             className="form-control"                            
@@ -141,7 +145,7 @@ export class AddUser extends Component {
                         />
                     </div>
                     <div className="form-group col-3">
-                        <label>mother's first name:</label>
+                        <label>anyja keresztneve:</label>
                         <input 
                             onChange={e=>this.handleInputChange(e)}
                             className="form-control"                            
@@ -149,7 +153,7 @@ export class AddUser extends Component {
                         /> 
                     </div>
                     <div className="form-group col-3">
-                        <label>mother's last name</label>
+                        <label>anyja vezetékneve</label>
                         <input 
                             onChange={e=>this.handleInputChange(e)}
                         className="form-control"                        
@@ -157,7 +161,7 @@ export class AddUser extends Component {
                         />
                     </div>
                     <div className="form-group col-3">
-                        <label>maximum vacations:</label>
+                        <label>összes szabadság:</label>
                         <input 
                             onChange={e=>this.handleInputChange(e)}
                             className="form-control"                        
@@ -166,11 +170,11 @@ export class AddUser extends Component {
                     </div>        
                 </div>
                 <div className="text-center">
-                    <button onClick={this.handleSave} className="btn btn-primary mt-2 mb-2 btn-lg">Save</button>
+                    <button onClick={this.handleSave} className="btn btn-primary mt-2 mb-2 btn-lg">Mentés</button>
                 </div>
             </div>
         )
     }
 }
 
-export default AddUser
+export default withRouter(AddUser)

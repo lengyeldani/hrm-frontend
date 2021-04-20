@@ -6,6 +6,7 @@ import ManagerEditTableRows from './ManagerEditTableRows';
 import {withRouter} from 'react-router'
 import {addVacation,showByUser} from '../../Services/VacationService'
 import {getUserById} from '../../Services/UserService'
+import {getVacationStatuses} from '../../Services/VacationService';
 
 export class ManagerEdit extends Component {
 
@@ -24,24 +25,33 @@ export class ManagerEdit extends Component {
             end:'',
             max:'',
             used:'',
-            remaining:''
+            remaining:'',
+            vacationStatuses:[]
         }      
     }
 
     componentDidMount(){
-        this.getData(this.state.current_page)
+        getVacationStatuses()
+        .then(response => response.json())
+        .then(data => this.setState({vacationStatuses:data}))      
+        this.getData(this.state.current_page)        
     }
 
+    
+
     getData = (current_page) => {
+        this.setState({dataLoaded:false})
         const {id} = this.props.match.params;
         showByUser(id, current_page)
         .then(response => response.json())
         .then(data => {
             this.setState({
                 vacations:data.data,
-                last_page:data.last_page                
+                last_page:data.last_page,
+                current_page:1             
             })
-        })        
+        })              
+        .finally(this.setState({dataLoaded:true})) 
 
         getUserById(id)
         .then(response => response.json())
@@ -56,18 +66,12 @@ export class ManagerEdit extends Component {
                 remaining:data.vacation_counter.remaining
             })
         })
-        .then(this.setState({dataLoaded:true}))        
+                
     }
 
     handlePageClick = (selectedObject)=> {        
-        this.getData(selectedObject.selected +1)
-        .then(response => response.json())
-        .then(data => this.setState({
-            users:data.data,
-            current_page:selectedObject.selected,
-            last_page:data.last_page
-        }))
-        .finally(this.setState({dataLoaded:true}))
+        this.getData(selectedObject.selected+1)        
+        this.setState({current_page:selectedObject+1})
     }
 
     handleRequestVacation = () => {
@@ -93,12 +97,41 @@ export class ManagerEdit extends Component {
     refreshData = () => {
         this.getData(this.state.current_page)
     }
+
+    renderPaginate = () => {
+        if(this.state.dataLoaded && this.state.vacations.length>0){
+            return (
+                <ReactPaginate 
+                                  
+                previousLabel={'előző'}
+                previousClassName={'page-item'}
+                nextLabel={'következő'}
+                pageRangeDisplayed={2}
+                marginPagesDisplayed={1}  
+                pageLinkClassName={'page-link'}                 
+                pageCount={this.state.last_page}                   
+                onPageChange={this.handlePageClick}
+                containerClassName={'pagination'}
+                activeClassName={'active'}
+                pageClassName={'page-item'}
+                disabledClassName={'disabled'}
+                breakClassName={'page-item'}
+                breakLinkClassName={'page-link'}
+                previousLinkClassName={'page-link'}
+                nextLinkClassName={'page-link'}
+                
+                />
+                )
+        }
+        else return null
+    }
     
 
     renderTable = () => {
         if(this.state.dataLoaded && this.state.vacations.length>0){
             return (
                 <ManagerEditTableRows
+                vacationStatuses={this.state.vacationStatuses}
                 data={this.state.vacations}                
                 refreshData={this.refreshData}
                 />
@@ -175,25 +208,7 @@ export class ManagerEdit extends Component {
                         {this.renderTable()}
                     </tbody>
                 </table>
-                <ReactPaginate
-                    previousLabel={'előző'}
-                    previousClassName={'page-item'}
-                    nextLabel={'következő'}
-                    pageRangeDisplayed={2}
-                    marginPagesDisplayed={1}  
-                    pageLinkClassName={'page-link'}                 
-                    pageCount={this.state.last_page}                   
-                    onPageChange={this.handlePageClick}
-                    containerClassName={'pagination'}
-                    activeClassName={'active'}
-                    pageClassName={'page-item'}
-                    disabledClassName={'disabled'}
-                    breakClassName={'page-item'}
-                    breakLinkClassName={'page-link'}
-                    previousLinkClassName={'page-link'}
-                    nextLinkClassName={'page-link'}
-                    
-                />
+                {this.renderPaginate()}
             </div>
         )
     }

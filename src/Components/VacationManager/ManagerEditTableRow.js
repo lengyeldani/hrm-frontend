@@ -8,21 +8,18 @@ export class ManagerEditTableRow extends Component {
 
     constructor(props) {
         super(props)
-        this.state ={
-            vacationStatuses:[],
+        this.state ={           
             dataLoaded:false,
             status:'',
-            id:''
+            id:undefined
         }
     }
 
-    componentDidMount(){
-        this.setState({status: this.props.vacation.vacation_status.id})
-
-        getVacationStatuses()
-        .then(response => response.json())
-        .then(data => this.setState({vacationStatuses:data, id:this.props.vacation.id}))
-        .then(this.setState({dataLoaded:true}))
+    componentDidMount(){        
+        this.setState({
+            id: this.props.id,
+            status:this.props.vacation.vacation_status.id
+        })        
     }
 
     handleStatusChange = (e) => {
@@ -30,9 +27,8 @@ export class ManagerEditTableRow extends Component {
             status:e.target.value
         })
         let data = {
-            vacationStatus:e.target.value
-        }
-        console.log(this.state.id,data)
+            'vacationStatus':e.target.value
+        }        
         changeVacationStatus(this.state.id,data)
         .then(response => {
             if(response.status === 200){
@@ -53,7 +49,7 @@ export class ManagerEditTableRow extends Component {
                 <td>{this.props.vacation.end}</td>        
                 <td>
                    <select onChange={e => this.handleStatusChange(e)} value={this.state.status} className="form-control col-3">
-                       <VacationStatusOptions vacationStatuses={this.state.vacationStatuses}/>
+                       <VacationStatusOptions vacationStatuses={this.props.vacationStatuses}/>
                    </select>
                 </td>
             </tr>

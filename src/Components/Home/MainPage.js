@@ -9,17 +9,17 @@ export class MainPage extends Component {
                 <div className="row">
                     <div className="col-6 border-bottom ml-3 mb-2 p-2">
                         <p>
-                            Szakdolgozatom témájaként választottam egy emberi erőforrásokat kezelő és medzselő webalkalmazás elkészítését.<br></br>
+                            Szakdolgozatom témájaként választottam egy emberi erőforrásokat kezelő és menedzselő webalkalmazás elkészítését.<br></br>
                             A weboldal működésének lényege, hogy a felhasználók beléptetésén és kiléptetésén kívül kezelni tudja
                             a különféle HR-es feladatokat.<br></br>
                             Ezek közé tartozik például a szabadságok kezelése a munkáltató és alkalmazottak körében egyaránt.
                         </p>
                     </div>                   
                 </div>
-                <div className="row mb-5">
+                <div className="row mb-5 mt-3">
                     <div className="col-6">
                     <h5>Funkciók:</h5>
-                        <ol class="list-group list-group list-group-numbered">
+                        <ol class="list-group list-group">
                             <li className="list-group-item">Felhasználók felvétele, módosítása, törlése.</li>
                             <li className="list-group-item">Felhasználókhoz jogosultságok rendelése.</li>
                             <li className="list-group-item">Felhasználók authentikálása, jogosultság alapú renderelés.</li>

@@ -74,7 +74,7 @@ export class Navbar extends Component {
         return (            
             <div>
             <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-                <a className="navbar-brand" href="#">HRManager</a>
+                <a className="navbar-brand" href="/">HRManager</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
                    <span className="navbar-toggler-icon"></span>
                 </button>

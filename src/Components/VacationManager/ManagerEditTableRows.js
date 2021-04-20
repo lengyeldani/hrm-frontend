@@ -8,6 +8,7 @@ export class ManagerEditTableRows extends Component {
                 <ManagerEditTableRow               
                 key={v.id}
                 vacation={v}
+                id={v.id}
                 refreshData={this.props.refreshData} 
                 vacationStatuses={this.props.vacationStatuses}            
                 />

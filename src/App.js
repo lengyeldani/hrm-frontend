@@ -74,7 +74,8 @@ class App extends Component {
             <Route path="/vacation/manager/edit/:id" exact strict  render={(props)=><ManagerEdit loggedInUser={this.state.loggedInUser} {...props} />}></Route>
            </Switch> 
           )        
-      }        
+      }
+        
   }
 
   renderContent = () => {
@@ -93,25 +94,16 @@ class App extends Component {
       </BrowserRouter>
       );
     }
-    else if(!this.state.authenticated && this.state.loading){
+    else if(!this.state.authenticated){
       return(
         <Loader 
           loader={this.state.loading}
         />
       )
     }
-    else if(!this.state.loading && !this.state.authenticated){
+    else if(this.state.loading && !this.state.authenticated){
       return(
-        <BrowserRouter>
-        <div>
-        <Navbar authenticated={this.state.authenticated} loggedInUser={this.state.loggedInUser}/>
-        <div className="container-fluid">
-          <MainPage/>
-        </div>
-        <Footer/>
-       </div>
-       
-      </BrowserRouter>
+        <MainPage/>
       )
     }
 

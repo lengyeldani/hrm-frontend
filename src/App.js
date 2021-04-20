@@ -5,7 +5,6 @@ import {BrowserRouter as Router, Switch, Route, Redirect, BrowserRouter} from 'r
 import Navbar from './Components/Common/Navbar'
 import Admin from './Components/Admin/Admin';
 import Footer from './Components/Common/Footer';
-import Home from './Components/Home/Home'
 import AddUser from './Components/Admin/AddUser';
 import Manager from './Components/VacationManager/Manager';
 import {ToastContainer} from 'react-toastify'
@@ -14,6 +13,7 @@ import EditUser from './Components/Admin/EditUser';
 import Vacation from './Components/Vacation/Vacation';
 import Loader from './Components/Common/Loader';
 import ManagerEdit from './Components/VacationManager/ManagerEdit';
+import MainPage from './Components/Home/MainPage';
 
 
 class App extends Component {
@@ -33,28 +33,29 @@ class App extends Component {
       if(data !== undefined && data.length !== 0){
         this.setState({
           loggedInUser:data,
-          authenticated:true,
-          loading:false
+          authenticated:true          
         })
-      }       
+      }
+            
     })
+    .finally(this.setState({loading:false}))
    
   }
 
   renderRoute = () => {
-    if(this.state.authenticated){
+    
       switch (this.state.loggedInUser.role_id) {
         case 1 || 2 || 3:
           return (
             <Switch>
-              <Route path="/" exact render={(props)=><Home/>}></Route>              
+              <Route path="/" exact render={(props)=><MainPage/>}></Route>              
               <Route path="/vacation" exact strict render={(props)=><Vacation loggedInUser={this.state.loggedInUser} {...props}/>}></Route>                                                   
            </Switch> 
           )          
         case 4:
           return(
             <Switch>
-              <Route path="/" exact render={(props)=><Home/>}></Route>
+              <Route path="/" exact render={(props)=><MainPage/>}></Route>
               <Route path="/admin" exact strict render={(props)=><Admin {...props}/>}></Route>
               <Route path="/vacation" exact strict render={(props)=><Vacation loggedInUser={this.state.loggedInUser} {...props}/>}></Route>                      
               <Route path="/vacation/manager" exact strict render={(props)=><Manager loggedInUser={this.state.loggedInUser} {...props}/>}></Route>
@@ -64,7 +65,7 @@ class App extends Component {
         case 5:
           return(
             <Switch>
-            <Route path="/" exact render={(props)=><Home/>}></Route>
+            <Route path="/" exact render={(props)=><MainPage/>}></Route>
             <Route path="/admin" exact strict render={(props)=><Admin {...props}/>}></Route>
             <Route path="/vacation" exact strict render={(props)=><Vacation loggedInUser={this.state.loggedInUser} {...props}/>}></Route>
             <Route path="/admin/addUser" exact strict render={(props)=><AddUser {...props}/>}></Route>
@@ -72,30 +73,18 @@ class App extends Component {
             <Route path="/vacation/manager" exact strict render={(props)=><Manager loggedInUser={this.state.loggedInUser} {...props}/>}></Route>
             <Route path="/vacation/manager/edit/:id" exact strict  render={(props)=><ManagerEdit loggedInUser={this.state.loggedInUser} {...props} />}></Route>
            </Switch> 
-          )
-        default:
-          break;
-      }
-    }
+          )        
+      }        
   }
 
   renderContent = () => {
-    if (this.state.authenticated){
+    if (this.state.authenticated && !this.state.loading){
       return(
       <BrowserRouter>
        <div>
         <Navbar loggedInUser={this.state.loggedInUser}/>
           <div className="container-fluid">
-          <ToastContainer/>
-           {/* <Switch>
-            <Route path="/" exact render={(props)=><Home/>}></Route>
-            <Route path="/admin" exact strict render={(props)=><Admin {...props}/>}></Route>
-            <Route path="/vacation" exact strict render={(props)=><Vacation loggedInUser={this.state.loggedInUser} {...props}/>}></Route>
-            <Route path="/admin/addUser" exact strict render={(props)=><AddUser {...props}/>}></Route>
-            <Route path="/admin/edit/:id" exact strict render={(props)=><EditUser {...props}/>}></Route>            
-            <Route path="/vacation/manager" exact strict render={(props)=><Manager loggedInUser={this.state.loggedInUser} {...props}/>}></Route>
-            <Route path="/vacation/manager/edit/:id" exact strict  render={(props)=><ManagerEdit loggedInUser={this.state.loggedInUser} {...props} />}></Route>
-           </Switch>  */}
+          <ToastContainer/>           
            {this.renderRoute()}
          </div>
         <Footer/>
@@ -104,11 +93,25 @@ class App extends Component {
       </BrowserRouter>
       );
     }
-    else if(!this.state.authenticated){
+    else if(!this.state.authenticated && this.state.loading){
       return(
         <Loader 
           loader={this.state.loading}
         />
+      )
+    }
+    else if(!this.state.loading && !this.state.authenticated){
+      return(
+        <BrowserRouter>
+        <div>
+        <Navbar authenticated={this.state.authenticated} loggedInUser={this.state.loggedInUser}/>
+        <div className="container-fluid">
+          <MainPage/>
+        </div>
+        <Footer/>
+       </div>
+       
+      </BrowserRouter>
       )
     }
 

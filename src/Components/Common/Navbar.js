@@ -9,7 +9,7 @@ export class Navbar extends Component {
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
                     <NavLink to={"/"} className="nav-link">
-                        Otthon
+                        Főoldal
                     </NavLink>
                     </li>                    
                     <li className="nav-item">
@@ -25,7 +25,7 @@ export class Navbar extends Component {
                     <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
                     <NavLink to={"/"} className="nav-link">
-                        Otthon
+                        Főoldal
                     </NavLink>
                     </li>                    
                     <li className="nav-item">
@@ -45,7 +45,7 @@ export class Navbar extends Component {
                     <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
                     <NavLink to={"/"} className="nav-link">
-                        Otthon
+                        Főoldal
                     </NavLink>
                     </li>                    
                     <li className="nav-item">
@@ -82,7 +82,7 @@ export class Navbar extends Component {
                 {this.renderNavLinks()}
                     <div className="d-flex">
                         <span className="text-white">
-                        {this.props.loggedInUser.firstName} {this.props.loggedInUser.lastName} |
+                            {this.props.loggedInUser.firstName} {this.props.loggedInUser.lastName}                             
                         </span>
                         <span className="text-white ml-2">
                         {this.props.loggedInUser.username}</span>

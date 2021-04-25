@@ -26,13 +26,13 @@ export class UserTableRow extends Component {
         this.props.getAllUser()
     }
  
-    render() {
+    render() {        
         return (
             <tr>
                 <td>{this.props.user.id}</td>
                 <td>{this.props.user.username}</td>
                 <td>{this.props.user.role.name}</td>
-                <td>{this.props.user.department_id}</td>
+                <td>{this.props.user.department.name}</td>
                 <td>{this.props.user.firstName}</td>
                 <td>{this.props.user.lastName}</td>
                 <td>{this.props.user.dateOfBirth}</td>

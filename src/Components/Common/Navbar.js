@@ -3,17 +3,18 @@ import {NavLink} from 'react-router-dom'
 export class Navbar extends Component {
 
     renderNavLinks = () => {
+        console.log(window.location.pathname)
         switch (this.props.loggedInUser.role_id) {
             case 1 || 2 || 3:
                 return(
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                    <NavLink to={"/"} className="nav-link">
+                    <NavLink exact to={"/"} className={"nav-link" + window.location.pathname === "/" ? "active" : ""}>
                         Főoldal
                     </NavLink>
                     </li>                    
                     <li className="nav-item">
-                    <NavLink to={"/vacation"} className="nav-link">
+                    <NavLink exact to={"/vacation/"} className={"nav-link" + window.location.pathname === "/vacation/" ? "active" : ""}>
                         Szabadságok
                     </NavLink>
                     </li>                                                   
@@ -24,12 +25,12 @@ export class Navbar extends Component {
                 return(
                     <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                    <NavLink to={"/"} className="nav-link">
+                    <NavLink exact to={"/"} className="nav-link">
                         Főoldal
                     </NavLink>
                     </li>                    
                     <li className="nav-item">
-                    <NavLink to={"/vacation"} className="nav-link">
+                    <NavLink exact to={"/vacation"} className="nav-link">
                         Szabadságok
                     </NavLink>
                     </li>
@@ -44,12 +45,12 @@ export class Navbar extends Component {
                 return(
                     <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                    <NavLink to={"/"} className="nav-link">
+                    <NavLink exact to={"/"} className="nav-link">
                         Főoldal
                     </NavLink>
                     </li>                    
                     <li className="nav-item">
-                    <NavLink to={"/vacation"} className="nav-link">
+                    <NavLink exact to={"/vacation"} className="nav-link">
                         Szabadságok
                     </NavLink>
                     </li>
@@ -59,7 +60,7 @@ export class Navbar extends Component {
                     </NavLink>
                     </li>      
                     <li className="nav-item">
-                    <NavLink to={"/admin"} className="nav-link">
+                    <NavLink exact to={"/admin"} className="nav-link">
                         Adminisztrátor
                     </NavLink>
                     </li>                             

@@ -48,7 +48,7 @@ export class ManagerEditTableRow extends Component {
                 <td>{this.props.vacation.start}</td>     
                 <td>{this.props.vacation.end}</td>        
                 <td>
-                   <select onChange={e => this.handleStatusChange(e)} value={this.state.status} className="form-control col-3">
+                   <select onChange={e => this.handleStatusChange(e)} value={this.state.status} className="form-control col-6">
                        <VacationStatusOptions vacationStatuses={this.props.vacationStatuses}/>
                    </select>
                 </td>

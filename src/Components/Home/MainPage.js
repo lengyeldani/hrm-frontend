@@ -12,7 +12,7 @@ export class MainPage extends Component {
                             Szakdolgozatom témájaként választottam egy emberi erőforrásokat kezelő és menedzselő webalkalmazás elkészítését.<br></br>
                             A weboldal működésének lényege, hogy a felhasználók beléptetésén és kiléptetésén kívül kezelni tudja
                             a különféle HR-es feladatokat.<br></br>
-                            Ezek közé tartozik például a szabadságok kezelése a munkáltató és alkalmazottak körében egyaránt.
+                            Ezek közé tartozik például a szabadságok kezelése, a munkáltató és alkalmazottak körében egyaránt.
                         </p>
                     </div>                   
                 </div>
@@ -24,9 +24,9 @@ export class MainPage extends Component {
                             <li className="list-group-item">Felhasználókhoz jogosultságok rendelése.</li>
                             <li className="list-group-item">Felhasználók authentikálása, jogosultság alapú renderelés.</li>
                             <li className="list-group-item">Szabadságok igénylése.</li>
-                            <li className="list-group-item">Összes, felhasznált és kivehető szabadságok megjelenítése felhasználónként.</li>
-                            <li className="list-group-item">Osztályvezető jogkörtől kezdődően az osztályukhoz tartozó alkalmazottak szabadságainak kezelése.</li>
-                            <li className="list-group-item">Kötelező szabadságok kiadása osztályvezetői szinttől.</li>
+                            <li className="list-group-item">Összes, felhasznált és kivehető szabadságok megjelenítése, felhasználónként.</li>
+                            <li className="list-group-item">Osztályvezető jogkörtől kezdődően, az osztályukhoz tartozó alkalmazottak szabadságainak kezelése.</li>
+                            <li className="list-group-item">Kötelező szabadságok kiadása, osztályvezetői szinttől.</li>
                         </ol>
                     </div>
                 </div>                

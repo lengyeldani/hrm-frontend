@@ -61,14 +61,12 @@ export class AddUser extends Component {
         .then(response => {
             if (response.ok) {
                 toast.success('Felhasználó hozzáadása sikeres!')
+                this.props.history.push('/admin')
             }
             else{
                 toast.warning('Nem sikerült hozzáadni a felhasználót!')
             }
-        })
-        .then(
-            this.props.history.push('/admin')  
-        )
+        })        
     }
 
     render() {

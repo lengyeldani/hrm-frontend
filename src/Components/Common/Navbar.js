@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import {NavLink} from 'react-router-dom'
 export class Navbar extends Component {
 
-    renderNavLinks = () => {
-        console.log(window.location.pathname)
+    renderNavLinks = () => {        
         switch (this.props.loggedInUser.role_id) {
             case 1 || 2 || 3:
                 return(
@@ -60,7 +59,7 @@ export class Navbar extends Component {
                     </NavLink>
                     </li>      
                     <li className="nav-item">
-                    <NavLink exact to={"/admin"} className="nav-link">
+                    <NavLink to={"/admin"} className="nav-link">
                         Adminisztrátor
                     </NavLink>
                     </li>                             

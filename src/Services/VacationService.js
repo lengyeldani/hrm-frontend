@@ -64,3 +64,12 @@ export function showByUser(id, current_page) {
         method:'GET'
     })
 }
+
+export function managerVacationStatuses() {
+    const url = apiEndpoint + 'vacations/vacationStatusesForManager';
+
+    return fetch(url, {
+        headers,
+        method:'GET'
+    })
+}

@@ -6,7 +6,7 @@ import ManagerEditTableRows from './ManagerEditTableRows';
 import {withRouter} from 'react-router'
 import {addVacation,showByUser} from '../../Services/VacationService'
 import {getUserById} from '../../Services/UserService'
-import {getVacationStatuses} from '../../Services/VacationService';
+import {managerVacationStatuses} from '../../Services/VacationService';
 
 export class ManagerEdit extends Component {
 
@@ -31,7 +31,7 @@ export class ManagerEdit extends Component {
     }
 
     componentDidMount(){
-        getVacationStatuses()
+        managerVacationStatuses()
         .then(response => response.json())
         .then(data => this.setState({vacationStatuses:data}))      
         this.getData(this.state.current_page)        
